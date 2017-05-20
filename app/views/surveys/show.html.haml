@@ -1,0 +1,51 @@
+=params.inspect
+.page-header
+  = link_to surveys_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_survey_path(@survey), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show survey
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @survey.name
+  %dt Description:
+  %dd= @survey.description
+  %dt Schedule:
+  %dd= @survey.schedule
+  %dt Status:
+  %dd= @survey.status
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Survey question type
+        %th Question
+        %th
+        %th
+
+    %tbody
+      - @survey_questions.each do |survey_question|
+        %tr
+          %td= survey_question.survey_question_type.name
+          %td= survey_question.question
+          %td= link_to 'Edit', edit_survey_question_path(survey_question)
+          %td= link_to 'Destroy', survey_question, data: { confirm: 'Are you sure?' }, method: :delete
+
+
+= link_to "Add Survey Question", survey_add_question_path(params[:id]), class: 'btn btn-success', role: "button", data: {toggle: "modal", target: '#addQuestionModal', remote: true}, title: "Survey Questions"
+
+- content_for(:sidebar) do
+  = render 'surveys_sidebar'
+
+.modal.fade#addQuestionModal{tabindex: '-1'}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &times;
+        %h3.modal-title
+      .modal-body
+        %p

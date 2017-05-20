@@ -1,0 +1,32 @@
+.page-header
+  = link_to contests_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_contest_path(@contest), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show contest
+
+%dl.dl-horizontal
+  %dt Contest type:
+  %dd= @contest.contest_type
+  %dt Schedule:
+  %dd= @contest.schedule
+  %dt Name:
+  %dd= @contest.name
+  %dt Description:
+  %dd= @contest.description
+  %dt Texter x:
+  %dd= @contest.texter_x
+  %dt Texter y:
+  %dd= @contest.texter_y
+  %dt Keyword:
+  %dd= @contest.keyword
+  %dt Caller x:
+  %dd= @contest.caller_x
+  %dt Caller y:
+  %dd= @contest.caller_y
+  %dt Survey:
+  %dd= @contest.survey
+  %dt Winner:
+  %dd= @contest.winner

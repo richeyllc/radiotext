@@ -1,0 +1,29 @@
+%li.disabled
+  = link_to contacts_dashboard_path do
+    = fa_icon "male"
+    %span.hidden-xs.hidden-sm= "Contacts"
+
+%li{class: (params[:action] == "dashboard") ? "active" : nil}
+  = link_to contacts_dashboard_path do
+    = fa_icon "tachometer"
+    %span.hidden-xs.hidden-sm Dashboard
+
+%li{class: (params[:action] == "current") ? "active" : nil}
+  = link_to contacts_path do
+    = fa_icon "envelope"
+    %span.hidden-xs.hidden-sm All Contacts
+
+%li{class: (params[:action] == "new") ? "active" : nil}
+  = link_to new_contact_path do
+    = fa_icon "envelope-open-o"
+    %span.hidden-xs.hidden-sm New Contact
+
+%li{class: (params[:action] == "deleted") ? "active" : nil}
+  = link_to deleted_contacts_path do
+    = fa_icon "plus-square"
+    %span.hidden-xs.hidden-sm Deleted Contacts
+
+%li.disabled{class: true}
+  = link_to messages_dashboard_path do
+    = fa_icon "question"
+    %span.hidden-xs.hidden-sm Something Else?

@@ -1,0 +1,29 @@
+%li.disabled
+  = link_to surveys_dashboard_path do
+    = fa_icon "bar-chart"
+    %span.hidden-xs.hidden-sm= "Surveys"
+
+%li{class: (params[:action] == "dashboard") ? "active" : nil}
+  = link_to surveys_dashboard_path do
+    = fa_icon "tachometer"
+    %span.hidden-xs.hidden-sm Dashboard
+
+%li{class: (params[:action] == "active") ? "active" : nil}
+  = link_to active_surveys_path do
+    = fa_icon "envelope"
+    %span.hidden-xs.hidden-sm Active Surveys
+
+%li{class: (params[:action] == "index") ? "active" : nil}
+  = link_to surveys_path do
+    = fa_icon "envelope-open-o"
+    %span.hidden-xs.hidden-sm Completed Surveys
+
+%li{class: (params[:controller] == "surveys" && params[:action] == "new") ? "active" : nil}
+  = link_to new_survey_path do
+    = fa_icon "plus-square"
+    %span.hidden-xs.hidden-sm New Survey
+
+%li.disabled{class: true}
+  = link_to messages_dashboard_path do
+    = fa_icon "question"
+    %span.hidden-xs.hidden-sm Something Else?

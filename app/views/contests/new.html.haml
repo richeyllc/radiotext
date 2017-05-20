@@ -1,0 +1,10 @@
+.page-header
+  = link_to contests_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  %h1 New contest
+
+= render 'form'
+
+- content_for(:sidebar) do
+  = render('contests_sidebar')

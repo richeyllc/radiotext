@@ -1,0 +1,10 @@
+.page-header
+  = link_to surveys_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  %h1 New survey
+
+= render 'form'
+
+- content_for(:sidebar) do
+  = render 'surveys_sidebar'

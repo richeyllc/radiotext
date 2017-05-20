@@ -1,0 +1,26 @@
+.page-header
+  = link_to schedules_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_schedule_path(@schedule), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show schedule
+
+%dl.dl-horizontal
+  %dt Schedule type:
+  %dd= @schedule.schedule_type
+  %dt Name:
+  %dd= @schedule.name
+  %dt Description:
+  %dd= @schedule.description
+  %dt Last run:
+  %dd= @schedule.last_run
+  %dt Next run:
+  %dd= @schedule.next_run
+  %dt Active:
+  %dd= @schedule.active
+  %dt Status:
+  %dd= @schedule.status
+  %dt Error message:
+  %dd= @schedule.error_message

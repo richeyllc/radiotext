@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  blast_type: one
+  schedule: one
+  name: MyString
+  description: MyText
+  status: MyString
+
+two:
+  blast_type: two
+  schedule: two
+  name: MyString
+  description: MyText
+  status: MyString

@@ -1,0 +1,36 @@
+.page-header
+  = link_to new_schedule_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Schedule
+  %h1 Listing schedules
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Schedule type
+        %th Name
+        %th Description
+        %th Last run
+        %th Next run
+        %th Active
+        %th Status
+        %th Error message
+        %th
+        %th
+        %th
+
+    %tbody
+      - @schedules.each do |schedule|
+        %tr
+          %td= schedule.schedule_type
+          %td= schedule.name
+          %td= schedule.description
+          %td= schedule.last_run
+          %td= schedule.next_run
+          %td= schedule.active
+          %td= schedule.status
+          %td= schedule.error_message
+          %td= link_to 'Show', schedule
+          %td= link_to 'Edit', edit_schedule_path(schedule)
+          %td= link_to 'Destroy', schedule, data: { confirm: 'Are you sure?' }, method: :delete

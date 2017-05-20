@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  schedule_type: one
+  name: MyString
+  description: MyText
+  last_run: 2017-05-01 09:45:13
+  next_run: 2017-05-01 09:45:13
+  active: false
+  status: MyString
+  error_message: MyText
+
+two:
+  schedule_type: two
+  name: MyString
+  description: MyText
+  last_run: 2017-05-01 09:45:13
+  next_run: 2017-05-01 09:45:13
+  active: false
+  status: MyString
+  error_message: MyText

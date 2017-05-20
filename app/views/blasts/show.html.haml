@@ -1,0 +1,20 @@
+.page-header
+  = link_to blasts_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_blast_path(@blast), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show blast
+
+%dl.dl-horizontal
+  %dt Blast type:
+  %dd= @blast.blast_type
+  %dt Schedule:
+  %dd= @blast.schedule
+  %dt Name:
+  %dd= @blast.name
+  %dt Description:
+  %dd= @blast.description
+  %dt Status:
+  %dd= @blast.status

@@ -1,0 +1,88 @@
+#navbar-collapse-1.collapse.navbar-collapse
+  - if user_signed_in?
+    %ul.nav.navbar-nav
+      -# Configuration Menu
+      %li{class: (params[:controller] == "messages" || params[:controller] == "blasts") ? "active" : nil}
+        = active_link_to messages_dashboard_path, active: ["messages"], title: 'Messages' do
+          = fa_icon "comments", class: 'fa-3x'
+          %span.fa-title MESSAGES
+
+      %li{class: (params[:controller] == "contests") ? "active" : nil}
+        = active_link_to contests_dashboard_path, active: ["contests"], title: 'Contests' do
+          = fa_icon "trophy", class: 'fa-3x align-center'
+          %span.fa-title CONTESTS
+
+      %li{class: (params[:controller] == "surveys") ? "active" : nil}
+        = active_link_to surveys_dashboard_path, active: ["surveys"], title: 'Surveys' do
+          = fa_icon "bar-chart", class: 'fa-3x'
+          %span.fa-title SURVEYS
+
+      %li{class: (params[:controller] == "contacts") ? "active" : nil}
+        = active_link_to contacts_dashboard_path, active: ["contacts"], title: 'Contacts' do
+          = fa_icon "male", class: 'fa-3x'
+          %span.fa-title CONTACTS
+
+      -# Sidebar menu
+      -# Configuration Menu
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#", title: 'Settings'}
+          = fa_icon "cogs", class: 'fa-3x'
+          %span.fa-title SETTINGS
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            = link_to root_path do
+              %span.glyphicon.glyphicon-phone
+              PHONE NUMBERS
+          %li
+            = link_to root_path do
+              %span.glyphicon.glyphicon-user
+              CONTACTS
+          %li.divider
+          %li
+            = link_to root_path do
+              %span.glyphicon.glyphicon-briefcase
+              Terms and Conditions
+          %li
+            = link_to root_path do
+              = fa_icon "envelope-o"
+              Email Templates
+          %li.divider
+          %li
+            = link_to root_path do
+              %span.glyphicon.glyphicon-question-sign
+              Audits
+
+      -# User Menu
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#", title: current_user.name}
+          = fa_icon "user", class: 'fa-3x'
+          %span.fa-title= current_user.name
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            = link_to root_path do
+              = fa_icon "sticky-note-o"
+              My Scratchpads
+          %li.divider
+          %li
+            = link_to destroy_user_session_path, method: :delete do
+              = fa_icon "power-off"
+              Logout
+  - else
+    %ul.nav.navbar-nav
+      %li{class: is_active_link?(new_user_session_path, :inclusive) ? 'active' : nil}
+        = active_link_to new_user_session_path, active: ["master/sessions"] do
+          = fa_icon "power-off", class: 'fa-1x'
+          %span.fa-title Login
+
+-# Scratchpad Modal
+- if user_signed_in?
+  .modal.fade#scratchpadModal{tabindex: '-1'}
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &times;
+          %h3.modal-title
+        .modal-body
+          %p

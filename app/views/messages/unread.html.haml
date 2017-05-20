@@ -1,0 +1,45 @@
+%h1 Unread Messages
+
+You have
+= rand(100)
+unread messages
+
+.page-header
+  = link_to new_message_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Message
+  %h1 Listing messages
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Contact
+        %th Phone number
+        %th Date sent
+        %th To
+        %th From
+        %th Body
+        %th Status
+        %th Flag
+        %th
+        %th
+        %th
+
+    %tbody
+      - @unread_messages.each do |message|
+        %tr
+          %td= message.contact.name
+          %td= message.phone_number.number
+          %td= message.date_sent
+          %td= message.to
+          %td= message.from
+          %td= message.body
+          %td= message.status
+          %td= message.flag
+          %td= link_to 'Show', message
+          %td= link_to 'Edit', edit_message_path(message)
+          %td= link_to 'Destroy', message, data: { confirm: 'Are you sure?' }, method: :delete
+
+- content_for(:sidebar) do
+  = render 'messages_sidebar'

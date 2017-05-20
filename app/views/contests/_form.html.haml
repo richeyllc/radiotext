@@ -1,0 +1,18 @@
+= simple_form_for(@contest) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :contest_type
+    = f.association :schedule
+    = f.input :name
+    = f.input :description
+    = f.input :texter_x
+    = f.input :texter_y
+    = f.input :keyword
+    = f.input :caller_x
+    = f.input :caller_y
+    = f.association :survey
+    = f.input :winner
+
+  .form-actions
+    = f.button :submit

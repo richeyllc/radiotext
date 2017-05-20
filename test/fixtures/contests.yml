@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contest_type: one
+  scehdule: one
+  name: MyString
+  description: MyText
+  texter_x: MyString
+  texter_y: MyString
+  keyword: MyString
+  caller_x: MyString
+  caller_y: MyString
+  survey: one
+  winner: MyString
+
+two:
+  contest_type: two
+  scehdule: two
+  name: MyString
+  description: MyText
+  texter_x: MyString
+  texter_y: MyString
+  keyword: MyString
+  caller_x: MyString
+  caller_y: MyString
+  survey: two
+  winner: MyString

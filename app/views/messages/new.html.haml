@@ -1,0 +1,16 @@
+%h1 Unread Messages
+
+You have
+= rand(100)
+unread messages
+
+.page-header
+  = link_to messages_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  %h1 New message
+
+= render 'form'
+
+- content_for(:sidebar) do
+  = render('messages_sidebar')

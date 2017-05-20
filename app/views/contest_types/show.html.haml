@@ -1,0 +1,14 @@
+.page-header
+  = link_to contest_types_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_contest_type_path(@contest_type), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show contest_type
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @contest_type.name
+  %dt Description:
+  %dd= @contest_type.description

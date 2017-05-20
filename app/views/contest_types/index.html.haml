@@ -1,0 +1,24 @@
+.page-header
+  = link_to new_contest_type_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Contest type
+  %h1 Listing contest_types
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th
+        %th
+        %th
+
+    %tbody
+      - @contest_types.each do |contest_type|
+        %tr
+          %td= contest_type.name
+          %td= contest_type.description
+          %td= link_to 'Show', contest_type
+          %td= link_to 'Edit', edit_contest_type_path(contest_type)
+          %td= link_to 'Destroy', contest_type, data: { confirm: 'Are you sure?' }, method: :delete

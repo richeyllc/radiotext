@@ -1,0 +1,10 @@
+.page-header
+  = link_to blasts_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  %h1 New blast
+
+= render 'form'
+
+- content_for(:sidebar) do
+  = render('messages/messages_sidebar')

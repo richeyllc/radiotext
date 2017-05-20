@@ -1,0 +1,12 @@
+= simple_form_for(@blast) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :blast_type
+    = f.association :schedule
+    = f.input :name
+    = f.input :description
+    = f.input :status
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,20 @@
+.modal-dialog.modal-lg
+  .modal-content
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel Modal header
+    .modal-body
+      %p
+        This is the modal body.
+        = simple_form_for(@survey_question) do |f|
+          = f.error_notification
+
+          .form-inputs
+            = f.hidden_field :survey_id, value: params[:survey_id]
+            = f.association :survey_question_type
+            = f.input :question
+
+          .form-actions
+            = f.button :submit
+    .modal-footer
+      %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close

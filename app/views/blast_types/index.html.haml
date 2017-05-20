@@ -1,0 +1,24 @@
+.page-header
+  = link_to new_blast_type_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Blast type
+  %h1 Listing blast_types
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th
+        %th
+        %th
+
+    %tbody
+      - @blast_types.each do |blast_type|
+        %tr
+          %td= blast_type.name
+          %td= blast_type.description
+          %td= link_to 'Show', blast_type
+          %td= link_to 'Edit', edit_blast_type_path(blast_type)
+          %td= link_to 'Destroy', blast_type, data: { confirm: 'Are you sure?' }, method: :delete

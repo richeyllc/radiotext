@@ -1,0 +1,33 @@
+%h1 Completed Surveys
+
+.page-header
+  = link_to new_survey_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Survey
+  %h1 Listing surveys
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th Schedule
+        %th Status
+        %th
+        %th
+        %th
+
+    %tbody
+      - @surveys.each do |survey|
+        %tr
+          %td= survey.name
+          %td= survey.description
+          %td= survey.schedule
+          %td= survey.status
+          %td= link_to 'Show', survey
+          %td= link_to 'Edit', edit_survey_path(survey)
+          %td= link_to 'Destroy', survey, data: { confirm: 'Are you sure?' }, method: :delete
+
+- content_for(:sidebar) do
+  = render 'surveys_sidebar'

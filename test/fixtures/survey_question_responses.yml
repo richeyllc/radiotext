@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contact: one
+  survey: one
+  survey_question: one
+  boolean_response: false
+  rate_response: 1
+  written_response: MyText
+
+two:
+  contact: two
+  survey: two
+  survey_question: two
+  boolean_response: false
+  rate_response: 1
+  written_response: MyText

@@ -1,0 +1,10 @@
+.page-header
+  = link_to schedule_types_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to @schedule_type, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-info-sign
+    Show
+  %h1 Editing schedule_type
+
+= render 'form'

@@ -1,0 +1,21 @@
+= simple_form_for(@contact) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :email
+    = f.input :address_1
+    = f.input :address_2
+    = f.input :city
+    = f.input :state
+    = f.input :phone
+    = f.input :age
+    = f.input :birthdate
+    = f.input :opt_in_a
+    = f.input :opt_in_b
+    = f.input :opt_in_c
+    = f.input :confirmed_number
+    = f.input :notes
+
+  .form-actions
+    = f.button :submit

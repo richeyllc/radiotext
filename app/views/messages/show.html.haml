@@ -1,0 +1,40 @@
+.page-header
+  = link_to messages_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_message_path(@message), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show message
+
+%dl.dl-horizontal
+  %dt Contact:
+  %dd= @message.contact.name
+  %dt Phone number:
+  %dd= @message.phone_number.number
+  %dt Twilio date created:
+  %dd= @message.twilio_date_created
+  %dt Twilio date updated:
+  %dd= @message.twilio_date_updated
+  %dt Date sent:
+  %dd= @message.date_sent
+  %dt Account sid:
+  %dd= @message.account_sid
+  %dt To:
+  %dd= @message.to
+  %dt From:
+  %dd= @message.from
+  %dt Body:
+  %dd= @message.body
+  %dt Status:
+  %dd= @message.status
+  %dt Flag:
+  %dd= @message.flag
+  %dt Api version:
+  %dd= @message.api_version
+  %dt Price:
+  %dd= @message.price
+  %dt Uri:
+  %dd= @message.uri
+  %dt Twilio data:
+  %dd= @message.twilio_data

@@ -1,0 +1,12 @@
+= simple_form_for(@message) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :contact
+    = f.association :phone_number, label_method: :number, value_method: :id
+    = f.input :to
+    = f.input :from
+    = f.input :body
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,10 @@
+= simple_form_for(@survey_question) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :survey
+    = f.association :survey_question_type
+    = f.input :question
+
+  .form-actions
+    = f.button :submit

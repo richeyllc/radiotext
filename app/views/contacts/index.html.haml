@@ -1,0 +1,51 @@
+.page-header
+  = link_to new_contact_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Contact
+  %h1 Listing contacts
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Email
+        %th Address 1
+        %th Address 2
+        %th City
+        %th State
+        %th Phone
+        %th Age
+        %th Birthdate
+        %th Opt in a
+        %th Opt in b
+        %th Opt in c
+        %th Confirmed number
+        %th Notes
+        %th
+        %th
+        %th
+
+    %tbody
+      - @contacts.each do |contact|
+        %tr
+          %td= contact.name
+          %td= contact.email
+          %td= contact.address_1
+          %td= contact.address_2
+          %td= contact.city
+          %td= contact.state
+          %td= contact.phone
+          %td= contact.age
+          %td= contact.birthdate
+          %td= contact.opt_in_a
+          %td= contact.opt_in_b
+          %td= contact.opt_in_c
+          %td= contact.confirmed_number
+          %td= contact.notes
+          %td= link_to 'Show', contact
+          %td= link_to 'Edit', edit_contact_path(contact)
+          %td= link_to 'Destroy', contact, data: { confirm: 'Are you sure?' }, method: :delete
+
+- content_for(:sidebar) do
+  = render('contacts_sidebar')

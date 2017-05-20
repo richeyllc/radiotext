@@ -1,0 +1,15 @@
+= simple_form_for(@schedule) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :schedule_type
+    = f.input :name
+    = f.input :description
+    = f.input :last_run
+    = f.input :next_run
+    = f.input :active
+    = f.input :status
+    = f.input :error_message
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,22 @@
+.page-header
+  = link_to survey_question_responses_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_survey_question_response_path(@survey_question_response), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show survey_question_response
+
+%dl.dl-horizontal
+  %dt Contact:
+  %dd= @survey_question_response.contact
+  %dt Survey:
+  %dd= @survey_question_response.survey
+  %dt Survey question:
+  %dd= @survey_question_response.survey_question
+  %dt Boolean response:
+  %dd= @survey_question_response.boolean_response
+  %dt Rate response:
+  %dd= @survey_question_response.rate_response
+  %dt Written response:
+  %dd= @survey_question_response.written_response

@@ -1,0 +1,26 @@
+.page-header
+  = link_to new_survey_question_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Survey question
+  %h1 Listing survey_questions
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Survey
+        %th Survey question type
+        %th Question
+        %th
+        %th
+        %th
+
+    %tbody
+      - @survey_questions.each do |survey_question|
+        %tr
+          %td= survey_question.survey
+          %td= survey_question.survey_question_type
+          %td= survey_question.question
+          %td= link_to 'Show', survey_question
+          %td= link_to 'Edit', edit_survey_question_path(survey_question)
+          %td= link_to 'Destroy', survey_question, data: { confirm: 'Are you sure?' }, method: :delete

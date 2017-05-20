@@ -1,0 +1,38 @@
+.page-header
+  = link_to contacts_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_contact_path(@contact), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show contact
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @contact.name
+  %dt Email:
+  %dd= @contact.email
+  %dt Address 1:
+  %dd= @contact.address_1
+  %dt Address 2:
+  %dd= @contact.address_2
+  %dt City:
+  %dd= @contact.city
+  %dt State:
+  %dd= @contact.state
+  %dt Phone:
+  %dd= @contact.phone
+  %dt Age:
+  %dd= @contact.age
+  %dt Birthdate:
+  %dd= @contact.birthdate
+  %dt Opt in a:
+  %dd= @contact.opt_in_a
+  %dt Opt in b:
+  %dd= @contact.opt_in_b
+  %dt Opt in c:
+  %dd= @contact.opt_in_c
+  %dt Confirmed number:
+  %dd= @contact.confirmed_number
+  %dt Notes:
+  %dd= @contact.notes

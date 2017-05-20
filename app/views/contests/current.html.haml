@@ -1,0 +1,46 @@
+.page-header
+  = link_to new_contest_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Contest
+  %h1 Current contests
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Contest type
+        %th Schedule
+        %th Name
+        %th Description
+        %th Texter x
+        %th Texter y
+        %th Keyword
+        %th Caller x
+        %th Caller y
+        %th Survey
+        %th Winner
+        %th
+        %th
+        %th
+
+    %tbody
+      - @contests.each do |contest|
+        %tr
+          %td= contest.contest_type
+          %td= contest.schedule
+          %td= contest.name
+          %td= contest.description
+          %td= contest.texter_x
+          %td= contest.texter_y
+          %td= contest.keyword
+          %td= contest.caller_x
+          %td= contest.caller_y
+          %td= contest.survey
+          %td= contest.winner
+          %td= link_to 'Show', contest
+          %td= link_to 'Edit', edit_contest_path(contest)
+          %td= link_to 'Destroy', contest, data: { confirm: 'Are you sure?' }, method: :delete
+
+
+- content_for(:sidebar) do
+  = render('contests_sidebar')
