@@ -1,0 +1,30 @@
+.page-header
+  = link_to new_conversation_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Conversation
+  %h1 Listing conversations
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th To number
+        %th From number
+        %th Seen at
+        %th Deleted at
+        %th Notes
+        %th
+        %th
+        %th
+
+    %tbody
+      - @conversations.each do |conversation|
+        %tr
+          %td= conversation.to_number
+          %td= conversation.from_number
+          %td= conversation.seen_at
+          %td= conversation.deleted_at
+          %td= conversation.notes
+          %td= link_to 'Show', conversation
+          %td= link_to 'Edit', edit_conversation_path(conversation)
+          %td= link_to 'Destroy', conversation, data: { confirm: 'Are you sure?' }, method: :delete

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501163041) do
+ActiveRecord::Schema.define(version: 20170621034351) do
 
   create_table "blast_types", force: :cascade do |t|
     t.string   "name"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20170501163041) do
     t.string   "address_2"
     t.string   "city"
     t.string   "state"
-    t.string   "phone"
     t.integer  "age"
     t.date     "birthdate"
     t.boolean  "opt_in_a"
@@ -48,6 +47,8 @@ ActiveRecord::Schema.define(version: 20170501163041) do
     t.text     "notes"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "phone_number_id"
+    t.index ["phone_number_id"], name: "index_contacts_on_phone_number_id"
   end
 
   create_table "contest_types", force: :cascade do |t|
@@ -76,6 +77,18 @@ ActiveRecord::Schema.define(version: 20170501163041) do
     t.index ["survey_id"], name: "index_contests_on_survey_id"
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "to_number_id"
+    t.integer  "from_number_id"
+    t.datetime "seen_at"
+    t.datetime "deleted_at"
+    t.text     "notes"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["from_number_id"], name: "index_conversations_on_from_number_id"
+    t.index ["to_number_id"], name: "index_conversations_on_to_number_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer  "contact_id"
     t.integer  "phone_number_id"
@@ -95,6 +108,20 @@ ActiveRecord::Schema.define(version: 20170501163041) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.datetime "date_seen"
+    t.string   "to_country"
+    t.string   "to_state"
+    t.string   "sms_message_sid"
+    t.integer  "num_media"
+    t.string   "to_city"
+    t.string   "from_zip"
+    t.string   "from_state"
+    t.string   "sms_status"
+    t.string   "from_city"
+    t.string   "from_country"
+    t.string   "to_zip"
+    t.integer  "num_segments"
+    t.string   "message_sid"
+    t.string   "sms_sid"
     t.index ["contact_id"], name: "index_messages_on_contact_id"
     t.index ["phone_number_id"], name: "index_messages_on_phone_number_id"
   end

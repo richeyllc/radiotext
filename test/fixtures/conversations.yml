@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  to_number: one
+  from_number: one
+  seen_at: 2017-06-20 23:30:26
+  deleted_at: 2017-06-20 23:30:26
+  notes: MyText
+
+two:
+  to_number: two
+  from_number: two
+  seen_at: 2017-06-20 23:30:26
+  deleted_at: 2017-06-20 23:30:26
+  notes: MyText

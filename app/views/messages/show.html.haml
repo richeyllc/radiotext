@@ -9,9 +9,9 @@
 
 %dl.dl-horizontal
   %dt Contact:
-  %dd= @message.contact.name
+  %dd= @message.contact.nil? ? "unknown" : @message.contact.name
   %dt Phone number:
-  %dd= @message.phone_number.number
+  %dd= @message.phone_number.nil? ? @message.from : @message.phone_number.number
   %dt Twilio date created:
   %dd= @message.twilio_date_created
   %dt Twilio date updated:
@@ -38,3 +38,9 @@
   %dd= @message.uri
   %dt Twilio data:
   %dd= @message.twilio_data
+.container-fluid
+  .row
+    .col-xs-4
+    .col-xs-4
+    .col-xs-4
+      .speech-bubble= "<br>#{@message.body}<br> <br>".html_safe

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Twilio communication routes
+  post 'twilio', to: 'twilio_router#incoming_message'
+  get 'twilio', to: 'twilio_router#incoming_message' #only for testing connectivity
   devise_for :users
   authenticated :user do
     root to: 'dashboard#index', as: :authenticated_root
@@ -11,6 +14,7 @@ Rails.application.routes.draw do
     get 'active_surveys', to: 'surveys#active'
     get 'contacts_dashboard', to: 'contacts#dashboard'
     get 'deleted_contacts', to: 'contacts#deleted'
+    resources :conversations
     resources :phone_numbers
     resources :survey_question_types
     resources :schedule_types

@@ -1,0 +1,12 @@
+= simple_form_for(@conversation) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :to_number
+    = f.association :from_number
+    = f.input :seen_at
+    = f.input :deleted_at
+    = f.input :notes
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,20 @@
+.page-header
+  = link_to conversations_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_conversation_path(@conversation), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show conversation
+
+%dl.dl-horizontal
+  %dt To number:
+  %dd= @conversation.to_number
+  %dt From number:
+  %dd= @conversation.from_number
+  %dt Seen at:
+  %dd= @conversation.seen_at
+  %dt Deleted at:
+  %dd= @conversation.deleted_at
+  %dt Notes:
+  %dd= @conversation.notes

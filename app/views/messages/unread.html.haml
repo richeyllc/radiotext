@@ -29,8 +29,8 @@ unread messages
     %tbody
       - @unread_messages.each do |message|
         %tr
-          %td= message.contact.name
-          %td= message.phone_number.number
+          %td= message.contact.nil? ? "unknown" : message.contact.name
+          %td= message.phone_number.nil? ? message.from : message.phone_number.number
           %td= message.date_sent
           %td= message.to
           %td= message.from
