@@ -1,0 +1,10 @@
+.page-header
+  = link_to my_numbers_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  %h1 New MyNumber
+
+= render 'form'
+
+- content_for(:sidebar) do
+  = render('my_numbers_sidebar')

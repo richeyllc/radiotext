@@ -32,10 +32,15 @@ class TwilioRouterController < ApplicationController
     # Message(contact_id: integer, phone_number_id: integer)
 
     # Now put that received message into the database:
-    # Find or create the PhoneNumber
-    this_phone = PhoneNumber.find_or_create_by(number: params["To"])
+    # Find or create the PhoneNumbers
+    to_phone = PhoneNumber.find_or_create_by(number: params["To"])
+    from_phone = PhoneNumber.find_or_create_by(number: params["From"])
     # Find or create the contact
-    this_contact = Contact.find_or_create_by(phone_number: this_phone)
+    this_contact = Contact.find_or_create_by(phone_number: from_phone)
+    # Find or create the conversation
+    # Need to find the actual IDs
+    my_numb = MyNumber.where(phone_number: to_phone)
+    convo = Conversation.find_or_create_by(my_number: my_numb, from_number: from_phone)
     # I can't get an automated process to work. Let's do this very wet (not DRY)
     Message.create(account_sid: params["AccountSid"], to: params["To"], from: params["From"], body: params["Body"],
       status: "received", flag: nil, api_version: params["ApiVersion"], price: nil, uri: nil,
@@ -43,7 +48,10 @@ class TwilioRouterController < ApplicationController
       sms_message_sid: params["SmsMessageSid"], num_media: params["NumMedia"], to_city: params["ToCity"],
       from_zip: params["FromZip"], from_state: params["FromState"], sms_status: params["SmsStatus"], from_city: params["FromCity"],
       from_country: params["FromCountry"], to_zip: params["ToZip"], num_segments: params["NumSegments"],
-      message_sid: params["MessageSid"], sms_sid: params["SmsSid"], contact: this_contact, phone_number: this_phone)
+      message_sid: params["MessageSid"], sms_sid: params["SmsSid"], contact: this_contact, phone_number: to_phone,
+      conversation: convo, deleted_at: nil)
+
+
 
     head :ok
   end

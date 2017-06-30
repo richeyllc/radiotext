@@ -10,6 +10,8 @@ class ConversationsController < ApplicationController
   # GET /conversations/1
   # GET /conversations/1.json
   def show
+    @messages = Message.where(conversation: @conversation, deleted_at: nil)
+    @new_message = Message.new
   end
 
   # GET /conversations/new
@@ -59,6 +61,16 @@ class ConversationsController < ApplicationController
       format.html { redirect_to conversations_url, notice: 'Conversation was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def dashboard
+    # Change the following to reflect the count of unread messages
+    @unread_conversations_count = Conversation.where(seen_at: nil).count
+  end
+
+  def unread
+    # Change the following to be all unread messages only
+    @unread_conversations = Conversation.all.where(seen_at: nil)
   end
 
   private

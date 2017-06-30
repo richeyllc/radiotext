@@ -1,0 +1,19 @@
+.page-header
+  = link_to my_numbers_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_my_number_path(@my_number), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show my_number
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @my_number.name
+  %dt Phone number:
+  %dd= @my_number.phone_number.number
+  %dt Description:
+  %dd= @my_number.description
+
+- content_for(:sidebar) do
+  = render('my_numbers_sidebar')

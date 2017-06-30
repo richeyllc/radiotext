@@ -1,0 +1,22 @@
+.container-fluid
+  - @messages.each do |message|
+    .row
+      - if @conversation.my_number.phone_number.number == message.from
+        .col-xs-4
+          .speech-bubble-reply= "<br>#{message.body}<br> <br>".html_safe
+        .col-xs-2
+          %p= message.created_at.localtime.strftime("%m/%d/%y-%H:%M:%S")
+        .col-xs-4
+      - else
+        .col-xs-4
+        .col-xs-2
+          %p= message.created_at.localtime.strftime("%m/%d/%y-%H:%M:%S")
+        .col-xs-4
+          .speech-bubble= "<br>#{message.body}<br> <br>".html_safe
+  .row
+    .col-xs-4
+      -# TODO: create a modal here to open up a way to create and send a message back to the sender
+      %button.btn.btn-primary.btn-lg{"data-target" => "#respondModal", "data-toggle" => "modal", :type => "button"}
+        Respond
+    .col-xs-2
+    .col-xs-4

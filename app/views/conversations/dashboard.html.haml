@@ -1,0 +1,6 @@
+%h1 Conversations Dashboard
+
+= link_to "You have #{@unread_conversations_count} Unread #{'Conversation'.pluralize(@unread_conversations_count)}", unread_conversations_path
+
+- content_for(:sidebar) do
+  = render('conversations_sidebar')

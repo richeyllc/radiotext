@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170621034351) do
+ActiveRecord::Schema.define(version: 20170622041543) do
 
   create_table "blast_types", force: :cascade do |t|
     t.string   "name"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20170621034351) do
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.integer  "to_number_id"
+    t.integer  "my_number_id"
     t.integer  "from_number_id"
     t.datetime "seen_at"
     t.datetime "deleted_at"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20170621034351) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["from_number_id"], name: "index_conversations_on_from_number_id"
-    t.index ["to_number_id"], name: "index_conversations_on_to_number_id"
+    t.index ["my_number_id"], name: "index_conversations_on_my_number_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -122,8 +122,20 @@ ActiveRecord::Schema.define(version: 20170621034351) do
     t.integer  "num_segments"
     t.string   "message_sid"
     t.string   "sms_sid"
+    t.integer  "conversation_id"
+    t.datetime "deleted_at"
     t.index ["contact_id"], name: "index_messages_on_contact_id"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["phone_number_id"], name: "index_messages_on_phone_number_id"
+  end
+
+  create_table "my_numbers", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "phone_number_id"
+    t.text     "description"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["phone_number_id"], name: "index_my_numbers_on_phone_number_id"
   end
 
   create_table "phone_numbers", force: :cascade do |t|

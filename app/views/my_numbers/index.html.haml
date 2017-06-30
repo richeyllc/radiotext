@@ -1,0 +1,29 @@
+.page-header
+  = link_to new_my_number_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New MyNumber
+  %h1 Listing My Numbers
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Phone number
+        %th Description
+        %th
+        %th
+        %th
+
+    %tbody
+      - @my_numbers.each do |my_number|
+        %tr
+          %td= my_number.name
+          %td= my_number.phone_number.number
+          %td= my_number.description
+          %td= link_to 'Show', my_number
+          %td= link_to 'Edit', edit_my_number_path(my_number)
+          %td= link_to 'Destroy', my_number, data: { confirm: 'Are you sure?' }, method: :delete
+
+- content_for(:sidebar) do
+  = render('my_numbers_sidebar')

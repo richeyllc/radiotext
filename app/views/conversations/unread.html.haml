@@ -1,0 +1,39 @@
+%h1 Unread Conversations
+
+You have
+= rand(100)
+unread conversations
+
+.page-header
+  = link_to new_conversation_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Message
+  %h1 Listing Conversations
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th To
+        %th From
+        %th Received At
+        %th New?
+        %th Notes
+        %th
+        %th
+        %th
+
+    %tbody
+      - @unread_conversations.each do |convo|
+        %tr{:onclick => "location.href='#{conversation_path(convo)}';"}
+          %td= convo.my_number.name
+          %td= convo.from_number.number
+          %td= convo.created_at
+          %td= convo.seen_at.nil? ? "&#10004;".html_safe : ""
+          %td= convo.notes
+          %td= link_to 'Show', convo
+          %td= link_to 'Edit', edit_conversation_path(convo)
+          %td= link_to 'Destroy', convo, data: { confirm: 'Are you sure?' }, method: :delete
+
+- content_for(:sidebar) do
+  = render 'conversations_sidebar'

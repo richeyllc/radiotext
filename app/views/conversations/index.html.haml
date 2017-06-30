@@ -1,3 +1,9 @@
+%h1 All Messages
+
+You have
+= rand(100)
+unread messages
+
 .page-header
   = link_to new_conversation_path, class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-plus
@@ -28,3 +34,6 @@
           %td= link_to 'Show', conversation
           %td= link_to 'Edit', edit_conversation_path(conversation)
           %td= link_to 'Destroy', conversation, data: { confirm: 'Are you sure?' }, method: :delete
+
+- content_for(:sidebar) do
+  = render('conversations_sidebar')

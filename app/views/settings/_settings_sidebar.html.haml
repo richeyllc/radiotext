@@ -1,0 +1,34 @@
+%li.disabled
+  = link_to settings_dashboard_path do
+    = fa_icon "comments-o"
+    %span.hidden-xs.hidden-sm= "Settings"
+
+%li{class: (params[:action] == "dashboard") ? "active" : nil}
+  = link_to settings_dashboard_path do
+    = fa_icon "tachometer"
+    %span.hidden-xs.hidden-sm Dashboard
+
+%li{class: (params[:controller] == "my_numbers") ? "active" : nil}
+  = link_to my_numbers_path do
+    = fa_icon "phone"
+    %span.hidden-xs.hidden-sm My Phone Numbers
+
+%li.disabled{class: (params[:action] == "") ? "active" : nil}
+  = link_to settings_dashboard_path do
+    = fa_icon "user"
+    %span.hidden-xs.hidden-sm Manage Users
+
+%li.disabled{class: (params[:controller] == "messages" && params[:action] == "new") ? "active" : nil}
+  = link_to settings_dashboard_path do
+    = fa_icon "envelope-o"
+    %span.hidden-xs.hidden-sm Email Templates
+
+%li.disabled{class: (params[:controller] == "blasts" && params[:action] == "new") ? "active" : nil}
+  = link_to settings_dashboard_path do
+    = fa_icon "question"
+    %span.hidden-xs.hidden-sm Something else
+
+%li.disabled{class: true}
+  = link_to settings_dashboard_path do
+    = fa_icon "question"
+    %span.hidden-xs.hidden-sm Something Else?

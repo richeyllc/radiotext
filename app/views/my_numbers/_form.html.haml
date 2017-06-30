@@ -1,0 +1,10 @@
+= simple_form_for(@my_number) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.association :phone_number, label_method: :number, value_method: :id
+    = f.input :description
+
+  .form-actions
+    = f.button :submit

@@ -71,6 +71,28 @@ class MessagesController < ApplicationController
     @unread_messages = Message.all
   end
 
+  def send_message_from_conversation
+    # This will send a message from inside the conversation modal-footer
+    # Parameters: {"utf8"=>"✓", "authenticity_token"=>"...", "message"=>{"to"=>"+14353134714", "from"=>"+14352161902", "body"=>"This was sent from the modal.", "conversation_id"=>"1"}, "commit"=>"Send Message"}
+
+    # TODO: Send the message to Twilio
+    te = TwilioEngine.new
+    # TODO: Add a message to the conversation.
+    convo = Conversation.find(params[:message][:conversation_id])
+    # TODO: Create the message
+    mes = Message.create(from: params[:message][:from], to: params[:message][:to], body: params[:message][:body], conversation: convo)
+    # TODO: send the message to twilio 
+    res = te.send_message(mes)
+
+
+
+    # Get the relevant Conversation
+
+    respond_to do |format|
+      format.html { redirect_to conversation_url(params[:message][:conversation_id]), notice: 'Message was successfully sent.' }
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
