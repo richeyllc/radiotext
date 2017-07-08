@@ -20,18 +20,7 @@ ActiveRecord::Schema.define(version: 20170707140826) do
     t.datetime "end_date"
     t.string "keyword"
     t.string "winner"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "competitors", force: :cascade do |t|
-    t.string "phone_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.string "phone_number"
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

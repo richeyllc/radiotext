@@ -5,6 +5,7 @@ class CreateCompetitions < ActiveRecord::Migration[5.1]
       t.datetime :end_date
       t.string :keyword
       t.string :winner
+      t.string :title
       
       t.timestamps
     end
