@@ -16,9 +16,9 @@ class CompetitionsController < ApplicationController
     @competition = Competition.new(params.require(:competition).permit(:title, :keyword))
     
     if @competition.save
-      redirect_to competition_path(@competition)
+      redirect_to competition_path(@competition), notice: 'Your competition was successfully created!'
     else
-      render :new
+      render :edit, notice: 'There was an error processing your request!'
     end
   end
   
@@ -26,8 +26,11 @@ class CompetitionsController < ApplicationController
   end
   
   def update
-    @competition.update(params.require(:competition).permit(:title, :keyword))
-    redirect_to competition_path(@competition)
+    if @competition.update(params.require(:competition).permit(:title, :keyword))
+      redirect_to @competition, notice: 'Your competition was successfully updated!'
+    else
+      render :edit, notice: 'There was an error processing your request!'
+    end
   end
   
   private
