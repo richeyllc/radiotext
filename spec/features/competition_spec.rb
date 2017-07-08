@@ -21,4 +21,11 @@ describe 'navigate' do
       expect(page).to have_link(@competition.title, href: competition_path(@competition))
     end
   end
+  
+  describe 'show' do
+    it 'can be reached successfully' do
+      visit competition_path(@competition)
+      expect(page.status_code).to eq(200)
+    end
+  end
 end
