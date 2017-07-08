@@ -40,5 +40,16 @@ describe 'navigate' do
       visit new_competition_path
       expect(page.status_code).to eq(200)
     end
+    
+    it 'allows users to create a new competition from the /new page' do
+      visit new_competition_path
+      
+      fill_in 'competition[title]', with: "Third Competition"
+      fill_in 'competition[keyword]', with: 'THIRDCOMP'
+      
+      click_on "Save"
+      
+      expect(page).to have_content("Third Competition")
+    end
   end
 end

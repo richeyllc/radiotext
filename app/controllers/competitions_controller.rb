@@ -9,6 +9,13 @@ class CompetitionsController < ApplicationController
   end
   
   def new
+    @competition = Competition.new
+  end
+  
+  def create
+    @competition = Competition.new(params.require(:competition).permit(:title, :keyword))
+    @competition.save
+    redirect_to competition_path(@competition)
   end
   
   private
