@@ -27,5 +27,11 @@ describe 'navigate' do
       visit competition_path(@competition)
       expect(page.status_code).to eq(200)
     end
+    
+    it 'should displat competition title and keyword' do
+      visit competition_path(@competition)
+      expect(page).to have_css('h1', text: 'First Competition')
+      expect(page).to have_css('h2', text: 'FIRSTCOMP')
+    end
   end
 end
