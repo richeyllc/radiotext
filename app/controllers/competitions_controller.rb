@@ -1,5 +1,5 @@
 class CompetitionsController < ApplicationController
-  before_action :set_competition, only: [:show]
+  before_action :set_competition, only: [:show, :edit, :update]
   
   def index
     @competitions = Competition.all
@@ -20,6 +20,14 @@ class CompetitionsController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def edit
+  end
+  
+  def update
+    @competition.update(params.require(:competition).permit(:title, :keyword))
+    redirect_to competition_path(@competition)
   end
   
   private

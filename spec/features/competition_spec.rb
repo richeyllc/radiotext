@@ -51,5 +51,15 @@ describe 'navigate' do
       
       expect(page).to have_content("Third Competition")
     end
+    
+    it 'allows users to update an existing competition from the /edit page' do
+      visit edit_competition_path(@competition)
+      
+      fill_in 'competition[title]', with: 'Updated Competition'
+      
+      click_on "Save"
+      
+      expect(page).to have_content("Updated Competition")
+    end
   end
 end
