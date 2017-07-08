@@ -34,4 +34,11 @@ describe 'navigate' do
       expect(page).to have_css('h2', text: 'FIRSTCOMP')
     end
   end
+  
+  describe 'form' do
+    it 'can be reached successfully when navigating to the /new path' do
+      visit new_competition_path
+      expect(page.status_code).to eq(200)
+    end
+  end
 end
