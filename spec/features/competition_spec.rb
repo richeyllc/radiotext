@@ -15,5 +15,10 @@ describe 'navigate' do
       visit competitions_path
       expect(page).to have_content(/FIRSTCOMP|SECONDCOMP/)
     end
+    
+    it 'has links to all the competition show pages' do
+      visit competitions_path
+      expect(page).to have_link(@competition.title, href: competition_path(@competition))
+    end
   end
 end
