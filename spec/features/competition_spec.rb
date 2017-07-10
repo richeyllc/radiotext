@@ -62,4 +62,25 @@ describe 'navigate' do
       expect(page).to have_content("Updated Competition")
     end
   end
+  
+  describe 'pick winner' do
+    it 'does not pick a winner if there are no competitors' do
+      visit competition_path(@competition)
+      
+      click_on "Pick Winner"
+      
+      expect(page).to have_content("There are no competitors yet!")
+    end
+    
+    it 'picks a winner if there are competitors' do
+      @competition.competitors.create(phone_number: "39 389 435 5390")
+      @competition.competitors.create(phone_number: "0935 534 983 93")
+      
+      visit competition_path(@competition)
+      
+      click_on "Pick Winner"
+      
+      expect(page).to have_content("Successfully Picked a Winner!")
+    end
+  end
 end
