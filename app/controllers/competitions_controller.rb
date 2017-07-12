@@ -1,5 +1,6 @@
 class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:show, :edit, :update, :pick_winner]
+  skip_before_action :verify_authenticity_token, only: [:incoming_sms]
   
   def index
     @competitions = Competition.all
@@ -42,6 +43,15 @@ class CompetitionsController < ApplicationController
         picked_winner = @competition.competitors.order("RANDOM()").first.phone_number
         @competition.winner = picked_winner
         @competition.save
+        
+        # Send SMS to winner
+        boot_twilio
+        sms = @client.messages.create(
+          from: ENV["TWILIO_NUMBER"],
+          to: picked_winner,
+          body: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!"
+        )
+        
         redirect_to competition_path(@competition), notice: 'Successfully Picked a Winner!'
       else
         redirect_to competition_path(@competition), notice: 'There are no competitors yet!' 
@@ -50,6 +60,12 @@ class CompetitionsController < ApplicationController
   end
   
   private
+  
+    def boot_twilio
+      account_sid = ENV["TWILIO_ACCOUNT_SID"]
+      auth_token = ENV["TWILIO_AUTH_TOKEN"]
+      @client = Twilio::REST::Client.new account_sid, auth_token
+    end
   
     def set_competition
       @competition = Competition.find(params[:id])
