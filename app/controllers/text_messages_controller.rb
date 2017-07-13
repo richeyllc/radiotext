@@ -16,13 +16,12 @@ class TextMessagesController < ApplicationController
   private
   
     def create_message(params)
-      boot_twillio
-      
-      sms = @client.messages.create(
-        from: ENV["TWILIO_NUMBER"],
-        to: params("from_number"),
-        body: params("text")
+      message = Message.create!(
+        number: params[:From],
+        text: params[:Body],
+        inbound: true
       )
+      
       render json: { state: 200 }
     end
     

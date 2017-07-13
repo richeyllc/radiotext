@@ -2,7 +2,8 @@ class MessagesController < ApplicationController
   include ApplicationHelper
   
   def index
-    @messages = Message.recent_by_number.by_date
+    # @messages = Message.recent_by_number.by_date
+    @messages = Message.all.order("created_at DESC")
   end
   
   def show
