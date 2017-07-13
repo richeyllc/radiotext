@@ -22,6 +22,8 @@ class TextMessagesController < ApplicationController
         inbound: true
       )
       
+      send_cable(message)
+      
       render json: { state: 200 }
     end
     
