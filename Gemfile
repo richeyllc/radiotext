@@ -15,6 +15,7 @@ gem 'turbolinks',   '~> 5'
 gem 'jbuilder',     '~> 2.5'
 gem 'dotenv-rails', '~> 2.2'
 gem 'twilio-ruby',  '~> 3.13'
+gem 'jquery-rails', '~> 4.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
