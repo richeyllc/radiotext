@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   include ApplicationHelper
 
   def index
-     @messages = Message.order("created_at desc").where("inbound = true")
+     @messages = Message.order("created_at desc")
   end
 
   def show

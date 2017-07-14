@@ -11,6 +11,19 @@ class TextMessagesController < ApplicationController
   # If webhooks are set up as POST requests
   def create
     create_message(params)
+    
+    # If SMS has competition keyword add user to competitors
+    # competition = Competition.where("keyword like '?%' ", params[:Body])
+    @competition = Competition.where("keyword like ?", "%#{params[:Body]}%").first
+    @competition.competitors.create(phone_number: params[:From])
+    
+    # Send SMS to winner
+    boot_twilio
+    sms = @client.messages.create(
+      from: ENV["TWILIO_NUMBER"],
+      to: params[:From],
+      body: "Hello! You're now registered as a competitor in the - #{@competition.title} - competition!"
+    )
   end
   
   private
@@ -27,7 +40,7 @@ class TextMessagesController < ApplicationController
       render json: { state: 200 }
     end
     
-    def boot_twillio
+    def boot_twilio
       account_sid = ENV["TWILIO_ACCOUNT_SID"]
       auth_token = ENV["TWILIO_AUTH_TOKEN"]
       @client = Twilio::REST::Client.new account_sid, auth_token

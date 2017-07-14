@@ -52,7 +52,13 @@ class CompetitionsController < ApplicationController
           body: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!"
         )
         
-        redirect_to competition_path(@competition), notice: 'Successfully Picked a Winner!'
+        message = Message.create!(
+          number: picked_winner,
+          text: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!",
+          inbound: false
+        )
+        
+        redirect_to competition_path(@competition), notice: 'Successfully Picked a Winner! -- please check the messages tab in order to get in contact with the winner'
       else
         redirect_to competition_path(@competition), notice: 'There are no competitors yet!' 
       end
