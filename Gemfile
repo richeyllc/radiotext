@@ -16,6 +16,7 @@ gem 'jbuilder',     '~> 2.5'
 gem 'dotenv-rails', '~> 2.2'
 gem 'twilio-ruby',  '~> 3.13'
 gem 'jquery-rails', '~> 4.1'
+gem 'redis',        '~> 3.3'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-semantic'
