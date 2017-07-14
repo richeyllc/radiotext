@@ -1,7 +1,9 @@
 <%= form_for @competition do |f| %>
-  <%= f.text_field :title %>
+  <label>Title</label>
+  <%= f.text_field :title, placeholder: "Competition Title" %>
   <br />
-  <%= f.text_field :keyword %>
+  <label>Keyword</label>
+  <%= f.text_field :keyword, placeholder: "Competition Keyword" %>
   <br />
   <%= f.submit "Save" %>
 <% end %>
