@@ -18,6 +18,9 @@ gem 'twilio-ruby',  '~> 3.13'
 gem 'jquery-rails', '~> 4.1'
 gem 'redis',        '~> 3.3'
 
+# UI
+gem 'bootstrap-sass', '~> 3.3.6'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-semantic'
 end
