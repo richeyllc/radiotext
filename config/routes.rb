@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
-  root to: 'competitions#index'
+
+  root 'home#index'
   
   resources :messages
   resources :text_messages
