@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   
+  resources :conversations
   resources :messages
   resources :text_messages
   resources :competitions
