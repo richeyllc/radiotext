@@ -1,5 +1,7 @@
-<%= link_to "/messages/#{message.number}",
-      class: 'ui card message',
-      data: { number: message.number } do %>
-  <%= render 'messages/detail', message: message %>
-<% end %>
+<li>
+  <div class="row">
+    <div class="<%= message.inbound ? 'left' : 'right' %> aligned">
+      <%= message.body %>
+    </div>
+  </div>
+</li>
