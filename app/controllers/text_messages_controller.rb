@@ -10,20 +10,115 @@ class TextMessagesController < ApplicationController
   
   # If webhooks are set up as POST requests
   def create
-    create_message(params)
     
-    # If SMS has competition keyword add user to competitors
-    # competition = Competition.where("keyword like '?%' ", params[:Body])
-    @competition = Competition.where("keyword like ?", "%#{params[:Body]}%").first
-    @competition.competitors.create(phone_number: params[:From])
+    # if listener exists
+      # if conversation exists
+        # create message
+        # check competition
+        # send SMS
+      # else 
+        # create conversation
+        # create message
+        # check competition
+        # send sms
+    # else
+      # create listener with phone number
+      # create conversation
+      # create message
+      # check competition
+      # send sms
     
-    # Send SMS to winner
-    boot_twilio
-    sms = @client.messages.create(
-      from: ENV["TWILIO_NUMBER"],
-      to: params[:From],
-      body: "Hello! You're now registered as a competitor in the - #{@competition.title} - competition!"
-    )
+    if Listener.exists?(phone_number: params[:From])
+      @listener = Listener.where(phone_number: params[:From]).first
+      if Conversation.exists?(sender_id: @listener.id)
+        # Find conversation
+        @conversation = Conversation.where(sender_id: @listener.id).first
+        
+        # Create message with conversation
+        @message = @conversation.messages.create!(
+          number: @listener.phone_number,
+          text: params[:Body],
+          inbound: true
+        )
+        
+        # Render message with action cable
+        send_cable(@message)
+        
+        # Check competitio -- to be updated later
+        @competition = Competition.where("keyword like ?", "%#{params[:Body]}%").first
+        @competition.competitors.create(phone_number: @listener.phone_number)
+        
+        # Send SMS
+        boot_twilio
+        @client.messages.create(
+          from: ENV["TWILIO_NUMBER"],
+          to: @listener.phone_number,
+          body: "Hey! Thanks for being our listener. You're now registered as a competitor in the - #{@competition.title} - competition!"
+        )
+               
+        # Render JSON 200
+        render json: { state: 200 }
+      else
+        # Create conversation
+        @conversation = @listener.conversations.build(sender_id: @listener.id)
+        @conversation.save 
+        
+        # Create message with conversation
+        @message = @conversation.messages.create!(
+          number: @listener.phone_number,
+          text: params[:Body],
+          inbound: true
+        )
+        
+        # Render message with action cable
+        send_cable(@message)
+        
+        # Check competitio -- to be updated later
+        @competition = Competition.where("keyword like ?", "%#{params[:Body]}%").first
+        @competition.competitors.create(phone_number: @listener.phone_number)
+        
+        # Send SMS
+        boot_twilio
+        @client.messages.create(
+          from: ENV["TWILIO_NUMBER"],
+          to: @listener.phone_number,
+          body: "Hey! Thanks for messaging us for the first time. You're now registered as a competitor in the - #{@competition.title} - competition!"
+        )
+        
+        # Render JSON 200
+        render json: { state: 200 }
+      end
+    else
+      @listener = Listener.create!(phone_number: params[:From])
+      
+      # Create conversation
+      @conversation = @listener.conversations.build(sender_id: @listener.id)
+      
+      # Create message with conversation
+      @message = @conversation.messages.create!(
+        number: @listener.phone_number,
+        text: params[:Body],
+        inbound: true
+      )
+      
+      # Render message with action cable
+      send_cable(@message)
+      
+      # Check competitio -- to be updated later
+      @competition = Competition.where("keyword like ?", "%#{params[:Body]}%").first
+      @competition.competitors.create(phone_number: @listener.phone_number)
+      
+      # Send SMS
+      boot_twilio
+      @client.messages.create(
+        from: ENV["TWILIO_NUMBER"],
+        to: @listener.phone_number,
+        body: "Hey! Thanks for messaging us for the first time. You're now registered as a competitor in the - #{@competition.title} - competition!"
+      )
+      
+      # Render JSON 200
+      render json: { state: 200 }
+    end
   end
   
   private

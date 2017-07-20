@@ -7,7 +7,7 @@ class ConversationsController < ApplicationController
   end
   
   def create
-    @conversation = Conversation.all..order('created_at DESC')
+    @conversation = Conversation.all.order('created_at DESC')
     
     add_to_conversations unless conversated?
     

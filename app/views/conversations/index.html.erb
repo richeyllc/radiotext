@@ -15,7 +15,7 @@
       <div class="panel-body">
         <ul>
           <% @listeners.each do |listener| %>
-            <li><%= link_to listener.phone_number, conversations_path(listener_id: listener), remote: true, method: post %></li>
+            <li><%= link_to listener.phone_number, conversations_path(listener_id: listener), remote: true, method: :post %></li>
           <% end %>
         </ul>
       </div>
