@@ -2,16 +2,24 @@ class MessagesController < ApplicationController
   include ApplicationHelper
 
   def index
-     @messages = Message.order("created_at desc")
+    @listeners = Listener.all
+    @conversations = Conversation.includes(:messages)
   end
 
   def show
-    @messages = Message.for_number(params[:id])
-    @new_message = Message.new(number: params[:id])
+    @listener = Listener.where(phone_number: params[:id]).first
+    @conversation = Conversation.where(sender_id: @listener.id).first
+    
+    @messages = @conversation.messages.for_number(params[:id])
+    @new_message = @conversation.messages.new(number: params[:id])
   end
 
   def create
-    message = Message.new(clean_params)
+
+    @listener = Listener.where(phone_number: params[:message][:number]).first
+    @conversation = Conversation.where(sender_id: @listener.id).first
+    
+    message = @conversation.messages.new(clean_params)
     message.inbound = false
 
     if message.save

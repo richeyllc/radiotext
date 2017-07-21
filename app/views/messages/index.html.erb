@@ -1,6 +1,7 @@
-<h1>All Messages</h1>
+<h1>All Conversations</h1>
 
-<div class="ui one cards numbers">
-  <%= render @messages %>
-</div>
-
+<% @conversations.each do |conversation| %>
+  <%= link_to "/messages/#{conversation.sender.phone_number}",  data: { number: conversation.sender.phone_number } do %>
+    <%= conversation.sender.phone_number %>
+  <% end %>
+<% end %>
