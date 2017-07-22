@@ -15,7 +15,6 @@ class MessagesController < ApplicationController
   end
 
   def create
-
     @listener = Listener.where(phone_number: params[:message][:number]).first
     @conversation = Conversation.where(sender_id: @listener.id).first
     

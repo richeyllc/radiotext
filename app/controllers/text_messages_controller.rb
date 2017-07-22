@@ -11,23 +11,6 @@ class TextMessagesController < ApplicationController
   # If webhooks are set up as POST requests
   def create
     
-    # if listener exists
-      # if conversation exists
-        # create message
-        # check competition
-        # send SMS
-      # else 
-        # create conversation
-        # create message
-        # check competition
-        # send sms
-    # else
-      # create listener with phone number
-      # create conversation
-      # create message
-      # check competition
-      # send sms
-    
     if Listener.exists?(phone_number: params[:From])
       @listener = Listener.where(phone_number: params[:From]).first
       if Conversation.exists?(sender_id: @listener.id)
@@ -54,6 +37,12 @@ class TextMessagesController < ApplicationController
           from: ENV["TWILIO_NUMBER"],
           to: @listener.phone_number,
           body: "Hey! Thanks for being our listener. You're now registered as a competitor in the - #{@competition.title} - competition!"
+        )
+        
+        @message = @conversation.messages.create!(
+          number: @listener.phone_number,
+          text: "Hey! Thanks for being our listener. You're now registered as a competitor in the - #{@competition.title} - competition!",
+          inbound: false
         )
                
         # Render JSON 200
@@ -85,6 +74,12 @@ class TextMessagesController < ApplicationController
           body: "Hey! Thanks for messaging us for the first time. You're now registered as a competitor in the - #{@competition.title} - competition!"
         )
         
+        @message = @conversation.messages.create!(
+          number: @listener.phone_number,
+          text: "Hey! Thanks for messaging us for the first time. You're now registered as a competitor in the - #{@competition.title} - competition!",
+          inbound: false
+        )
+        
         # Render JSON 200
         render json: { state: 200 }
       end
@@ -114,6 +109,12 @@ class TextMessagesController < ApplicationController
         from: ENV["TWILIO_NUMBER"],
         to: @listener.phone_number,
         body: "Hey! Thanks for messaging us for the first time. You're now registered as a competitor in the - #{@competition.title} - competition!"
+      )
+      
+      @message = @conversation.messages.create!(
+        number: @listener.phone_number,
+        text: "Hey! Thanks for messaging us for the first time. You're now registered as a competitor in the - #{@competition.title} - competition!",
+        inbound: false
       )
       
       # Render JSON 200
