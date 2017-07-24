@@ -1,7 +1,31 @@
-<h1>All Conversations</h1>
-
-<% @conversations.each do |conversation| %>
-  <%= link_to "/messages/#{conversation.sender.phone_number}",  data: { number: conversation.sender.phone_number } do %>
-    <%= conversation.sender.phone_number %>
-  <% end %>
-<% end %>
+<div class="main_section">
+  <div class="container">
+    <div class="chat_container">
+      <div class="col-sm-12 chat_sidebar">
+        <div class="row">
+          <div id="custom-search-input">
+            <div class="input-group col-md-12">
+              <p class="text-center">Conversations With Listeners</p>
+            </div>
+          </div>
+          <div class="member_list">
+            <ul class="list-unstyled">
+              <% @conversations.each do |conversation| %>
+                <li class="left clearfix">
+                  <div class="chat-body clearfix">
+                    <div class="contact_sec">
+                      <%= link_to "/messages/#{conversation.sender.phone_number}",  data: { number: conversation.sender.phone_number } do %>
+                        <strong class="primary-font"><%= conversation.sender.phone_number %></strong>
+                      <% end %>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+              
+            </ul>
+          </div>
+        </div>
+      </div><!--chat_sidebar-->
+    </div>
+  </div>
+</div>

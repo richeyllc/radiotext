@@ -1,7 +1,7 @@
-<li>
-  <div class="row">
-    <div class="<%= message.inbound ? 'left' : 'right' %> aligned">
+<li class="left clearfix <%= message.inbound ? 'admin_chat' : '' %>">
+  <div class="chat-body1 clearfix">
+    <p>
       <%= message.text %>
-    </div>
+    </p>
   </div>
 </li>

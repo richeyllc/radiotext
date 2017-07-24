@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
     @listener = Listener.where(phone_number: params[:id]).first
     @conversation = Conversation.where(sender_id: @listener.id).first
     
-    @messages = @conversation.messages.for_number(params[:id])
+    @messages = @conversation.messages.for_number(params[:id]).order("created_at DESC")
     @new_message = @conversation.messages.new(number: params[:id])
   end
 
