@@ -40,25 +40,325 @@ class CompetitionsController < ApplicationController
       redirect_to competition_path(@competition)
     else
       if not @competition.competitors.count == 0
-        picked_winner = @competition.competitors.order("RANDOM()").first.phone_number
-        @competition.winner = picked_winner
-        @competition.save
         
-        # Send SMS to winner
-        boot_twilio
-        sms = @client.messages.create(
-          from: ENV["TWILIO_NUMBER"],
-          to: picked_winner,
-          body: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!"
-        )
+        if @competition.category == 'one_random'
+          picked_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          @competition.winner = picked_winner
+          @competition.save
+          
+          # Send SMS to winner
+          boot_twilio
+          sms = @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: picked_winner,
+            body: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+          message = Message.create!(
+            number: picked_winner,
+            text: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )
+          
+          redirect_to competition_path(@competition), notice: 'Successfully Picked a Winner! -- please check the messages tab in order to get in contact with the winner'
         
-        message = Message.create!(
-          number: picked_winner,
-          text: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!",
-          inbound: false
-        )
+        elsif @competition.category == 'first_listener'
+          picked_winner = @competition.competitors.first.phone_number
+          @competition.winner = picked_winner
+          @competition.save
+          
+          # Send SMS to winner
+          boot_twilio
+          sms = @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: picked_winner,
+            body: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+          message = Message.create!(
+            number: picked_winner,
+            text: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )
+          
+          redirect_to competition_path(@competition), notice: 'Successfully Picked a Winner! -- please check the messages tab in order to get in contact with the winner'
         
-        redirect_to competition_path(@competition), notice: 'Successfully Picked a Winner! -- please check the messages tab in order to get in contact with the winner'
+        elsif @competition.category == 'last_listener'
+          picked_winner = @competition.competitors.last.phone_number
+          @competition.winner = picked_winner
+          @competition.save
+          
+          # Send SMS to winner
+          boot_twilio
+          sms = @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: picked_winner,
+            body: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+          message = Message.create!(
+            number: picked_winner,
+            text: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )
+          
+          redirect_to competition_path(@competition), notice: 'Successfully Picked a Winner! -- please check the messages tab in order to get in contact with the winner'
+        
+        elsif @competition.category == 'two_random'
+          first_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          second_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          @competition.winner = first_winner
+          @competition.second_winner = second_winner
+          @competition.save
+          
+          # Send SMS to winners
+          boot_twilio
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: first_winner,
+            body: "Hello! You are the first winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+           
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: second_winner,
+            body: "Hello! You are the second winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+          Message.create!(
+            number: first_winner,
+            text: "Hello! You are the first winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )    
+          
+          Message.create!(
+            number: second_winner,
+            text: "Hello! You are the second winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )
+          
+          redirect_to competition_path(@competition), notice: 'Successfully Picked Winners! -- please check the messages tab in order to get in contact with the winner'
+                
+        elsif @competition.category == 'three_random'
+          first_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          second_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          third_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          @competition.winner = first_winner
+          @competition.second_winner = second_winner
+          @competition.third_winner = third_winner
+          @competition.save
+          
+          # Send SMS to winners
+          boot_twilio
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: first_winner,
+            body: "Hello! You are the first winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+           
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: second_winner,
+            body: "Hello! You are the second winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )          
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: third_winner,
+            body: "Hello! You are the third winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+          Message.create!(
+            number: first_winner,
+            text: "Hello! You are the first winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )    
+          
+          Message.create!(
+            number: second_winner,
+            text: "Hello! You are the second winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )      
+          
+          Message.create!(
+            number: third_winner,
+            text: "Hello! You are the third winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )
+          
+          redirect_to competition_path(@competition), notice: 'Successfully Picked Winners! -- please check the messages tab in order to get in contact with the winner'
+                        
+        elsif @competition.category == 'four_random'
+          first_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          second_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          third_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          fourth_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          @competition.winner = first_winner
+          @competition.second_winner = second_winner
+          @competition.third_winner = third_winner
+          @competition.fourth_winner = fourth_winner
+          @competition.save
+          
+          # Send SMS to winners
+          boot_twilio
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: first_winner,
+            body: "Hello! You are the first winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+           
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: second_winner,
+            body: "Hello! You are the second winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )          
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: third_winner,
+            body: "Hello! You are the third winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )     
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: fourth_winner,
+            body: "Hello! You are the fourth winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+          Message.create!(
+            number: first_winner,
+            text: "Hello! You are the first winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )    
+          
+          Message.create!(
+            number: second_winner,
+            text: "Hello! You are the second winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )      
+          
+          Message.create!(
+            number: third_winner,
+            text: "Hello! You are the third winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )    
+          
+          Message.create!(
+            number: fourth_winner,
+            text: "Hello! You are the fourth winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )
+          
+          redirect_to competition_path(@competition), notice: 'Successfully Picked Winners! -- please check the messages tab in order to get in contact with the winner'
+                                
+        elsif @competition.category == 'five_random'
+          first_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          second_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          third_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          fourth_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          fifth_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          @competition.winner = first_winner
+          @competition.second_winner = second_winner
+          @competition.third_winner = third_winner
+          @competition.fourth_winner = fourth_winner
+          @competition.fifth_winner = fifth_winner
+          @competition.save
+          
+          # Send SMS to winners
+          boot_twilio
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: first_winner,
+            body: "Hello! You are the first winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+           
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: second_winner,
+            body: "Hello! You are the second winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )          
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: third_winner,
+            body: "Hello! You are the third winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )     
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: fourth_winner,
+            body: "Hello! You are the fourth winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )         
+          
+          @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: fifth_winner,
+            body: "Hello! You are the fifth winner of our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+          Message.create!(
+            number: first_winner,
+            text: "Hello! You are the first winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )    
+          
+          Message.create!(
+            number: second_winner,
+            text: "Hello! You are the second winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )      
+          
+          Message.create!(
+            number: third_winner,
+            text: "Hello! You are the third winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )    
+          
+          Message.create!(
+            number: fourth_winner,
+            text: "Hello! You are the fourth winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )         
+          
+          Message.create!(
+            number: fifth_winner,
+            text: "Hello! You are the fifth winner of our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )
+          
+          redirect_to competition_path(@competition), notice: 'Successfully Picked Winners! -- please check the messages tab in order to get in contact with the winner'
+        
+        else
+          picked_winner = @competition.competitors.order("RANDOM()").first.phone_number
+          @competition.winner = picked_winner
+          @competition.save
+          
+          # Send SMS to winner
+          boot_twilio
+          sms = @client.messages.create(
+            from: ENV["TWILIO_NUMBER"],
+            to: picked_winner,
+            body: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!"
+          )
+          
+          message = Message.create!(
+            number: picked_winner,
+            text: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!",
+            inbound: false
+          )
+          
+          redirect_to competition_path(@competition), notice: 'Successfully Picked a Winner! -- please check the messages tab in order to get in contact with the winner'
+          
+        end
+          
       else
         redirect_to competition_path(@competition), notice: 'There are no competitors yet!' 
       end
@@ -78,6 +378,6 @@ class CompetitionsController < ApplicationController
     end
     
     def competition_params
-      params.require(:competition).permit(:title, :keyword)
+      params.require(:competition).permit(:title, :keyword, :category)
     end
 end
