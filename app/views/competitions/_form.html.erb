@@ -5,5 +5,25 @@
   <label>Keyword</label>
   <%= f.text_field :keyword, placeholder: "Competition Keyword" %>
   <br />
+  <label>Winning Schema</label>
+  <%= f.select :category, grouped_options_for_select(
+    'Default' => [
+                  ['One Winner','one_random']
+                 ],
+                 
+    'Multiple Winners' => [ 
+                              ['Two Winners', 'two_random'],
+                              ['Three Winners', 'three_random'],
+                              ['Four Winners', 'four_random'],
+                              ['Five Winners', 'five_random']
+                             ],
+                        
+    'First or Last' => [
+                        ['First Listener', 'first_listener'],
+                        ['Last Listener', 'last_listener']
+                       ]
+          
+  ), {prompt: 'None'} %>
+  
   <%= f.submit "Save" %>
 <% end %>
