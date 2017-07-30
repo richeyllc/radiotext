@@ -5,6 +5,8 @@
   <label>Keyword</label>
   <%= f.text_field :keyword, placeholder: "Competition Keyword" %>
   <br />
+  <p>Note: Please choose a Winning Schema or a Nth Listener and NOT both!</p>
+  
   <label>Winning Schema</label>
   <%= f.select :category, grouped_options_for_select(
     'Default' => [
@@ -24,6 +26,10 @@
                        ]
           
   ), {prompt: 'None'} %>
+  
+  <br></br>
+  <label>Nth Listener</label>
+  <%= f.select :nth_listener, (1..200) %>
   
   <%= f.submit "Save" %>
 <% end %>
