@@ -336,6 +336,27 @@ class CompetitionsController < ApplicationController
           
           redirect_to competition_path(@competition), notice: 'Successfully Picked Winners! -- please check the messages tab in order to get in contact with the winner'
         
+        elsif @competition.nth_listener.present?
+          picked_winner = @competition.competitors[@competition.nth_listener].phone_number
+          @competition.winner = picked_winner
+          @competition.save
+          
+          # Send SMS to winner
+          # boot_twilio
+          # sms = @client.messages.create(
+          #   from: ENV["TWILIO_NUMBER"],
+          #   to: picked_winner,
+          #   body: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!"
+          # )
+          
+          # message = Message.create!(
+          #   number: picked_winner,
+          #   text: "Hello! You've won our competition - #{@competition.title} - we will contact you soon for your prize!",
+          #   inbound: false
+          # )
+          
+          redirect_to competition_path(@competition), notice: 'Successfully Picked a Winner! -- please check the messages tab in order to get in contact with the winner'
+        
         else
           picked_winner = @competition.competitors.order("RANDOM()").first.phone_number
           @competition.winner = picked_winner
