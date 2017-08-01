@@ -24,3 +24,140 @@
     </div>
   </div>
 </div>
+
+<br />
+<br />
+
+<div class="container bootstrap snippet">
+  <div class="panel-body inf-content">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Information for <%= params[:id] %></strong>
+          </div>
+          <div class="col-md-6">
+            <%= link_to "Edit Listener", edit_listener_path(@listener.id) %>
+          </div>
+        </div>
+        <br />
+
+        <div class="table-responsive">
+          <table class="table table-condensed table-responsive table-user-information">
+            <tbody>
+              
+              <tr>
+                <td>
+                  <strong><span class="glyphicon glyphicon-asterisk text-primary"></span> Phone Number</strong>
+                </td>
+                <td class="text-primary">
+                  <%= params[:id] %>
+                </td>
+              </tr>
+              
+              <% if @listener.name %>
+                <tr>
+                  <td>
+                    <strong><span class="glyphicon glyphicon-user text-primary"></span> Name</strong>
+                  </td>
+                  <td class="text-primary">
+                    <%= @listener.name %>
+                  </td>
+                </tr>
+              <% end %>
+              
+              <% if @listener.email %>
+                <tr>
+                  <td>
+                    <strong><span class="glyphicon glyphicon-envelope text-primary"></span> Email</strong>
+                  </td>
+                  <td class="text-primary">
+                    <%= @listener.email %>
+                  </td>
+                </tr>
+              <% end %>
+              
+              <% if @listener.address %>
+                <tr>
+                  <td>
+                    <strong><span class="glyphicon glyphicon-home text-primary"></span> Address</strong>
+                  </td>
+                  <td class="text-primary">
+                    <%= @listener.city %>
+                  </td>
+                </tr>
+              <% end %>          
+              
+              <% if @listener.city %>
+                <tr>
+                  <td>
+                    <strong><span class="glyphicon glyphicon-home text-primary"></span> City</strong>
+                  </td>
+                  <td class="text-primary">
+                    <%= @listener.city %>
+                  </td>
+                </tr>
+              <% end %>
+              
+              <% if @listener.state %>
+                <tr>
+                  <td>
+                    <strong><span class="glyphicon glyphicon-home text-primary"></span> State</strong>
+                  </td>
+                  <td class="text-primary">
+                    <%= @listener.state %>
+                  </td>
+                </tr>
+              <% end %>
+              
+              <% if @listener.zip_code %>
+                <tr>
+                  <td>
+                    <strong><span class="glyphicon glyphicon-home text-primary"></span> Zip Code</strong>
+                  </td>
+                  <td class="text-primary">
+                    <%= @listener.zip_code %>
+                  </td>
+                </tr>
+              <% end %>       
+              
+              <% if @listener.age %>
+                <tr>
+                  <td>
+                    <strong><span class="glyphicon glyphicon-user text-primary"></span> Age</strong>
+                  </td>
+                  <td class="text-primary">
+                    <%= @listener.age %>
+                  </td>
+                </tr>
+              <% end %>     
+              
+              <% if @listener.date_of_birth %>
+                <tr>
+                  <td>
+                    <strong><span class="glyphicon glyphicon-user text-primary"></span> Date of Birth</strong>
+                  </td>
+                  <td class="text-primary">
+                    <%= @listener.date_of_birth %>
+                  </td>
+                </tr>
+              <% end %>  
+              
+              <% if @listener.notes %>
+                <tr>
+                  <td>
+                    <strong><span class="glyphicon glyphicon-user text-primary"></span> Notes</strong>
+                  </td>
+                  <td class="text-primary">
+                    <%= @listener.notes %>
+                  </td>
+                </tr>
+              <% end %>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

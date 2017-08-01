@@ -32,4 +32,5 @@ class MessagesController < ApplicationController
   def clean_params
     params.require(:message).permit(:number, :text)
   end
+
 end
