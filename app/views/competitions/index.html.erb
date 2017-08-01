@@ -1,3 +1,17 @@
 <h3>Competitions</h3>
-
-<%= render @competitions %>
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Keyword</th>
+          <th>Listener Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @competitions %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,5 +1,6 @@
-<div>
-  <%= link_to competition.title, competition %>
-  <br />
-  <%= competition.keyword %>
-</div>
+<tr>
+  <td><%= competition.title %></td>
+  <td><%= competition.keyword %></td>
+  <td><%= competition.competitors.count %></td>
+  <td><%= link_to "Details", competition, :class => "btn btn-default btn-block" %></td>
+</tr>
