@@ -7,19 +7,22 @@
             <div class="input-group col-md-12">
               <p class="text-center">Conversations With Listeners</p>
             </div>
+            <%= link_to "Send Mass Message", get_mass_messages_path %>
           </div>
           <div class="member_list">
             <ul class="list-unstyled">
-              <% @conversations.each do |conversation| %>
-                <li class="left clearfix">
-                  <div class="chat-body clearfix">
-                    <div class="contact_sec">
-                      <%= link_to "/messages/#{conversation.sender.phone_number}",  data: { number: conversation.sender.phone_number } do %>
-                        <strong class="primary-font"><%= conversation.sender.phone_number %></strong>
-                      <% end %>
+              <% if @conversations %>
+                <% @conversations.each do |conversation| %>
+                  <li class="left clearfix">
+                    <div class="chat-body clearfix">
+                      <div class="contact_sec">
+                        <%= link_to "/messages/#{conversation.sender.phone_number}",  data: { number: conversation.sender.phone_number } do %>
+                          <strong class="primary-font"><%= conversation.sender.phone_number %></strong>
+                        <% end %>
+                      </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                <% end %>
               <% end %>
               
             </ul>
