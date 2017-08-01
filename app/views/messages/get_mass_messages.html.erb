@@ -1,0 +1,14 @@
+<h1>Send SMS Message To All Listeners</h1>
+
+<%= form_for :mass_message, :url => url_for(:controller => 'messages', :action => 'mass_messages') do |f| %>
+
+  <div class="field">
+    <%= f.text_area :text, rows: 3, class: "form-control" %>
+  </div>
+  
+  <div class="clearfix"></div>
+  
+  <div class="chat_bottom">
+    <%= f.submit 'Send', class: 'pull-right btn btn-success' %>
+  </div>
+<% end %>

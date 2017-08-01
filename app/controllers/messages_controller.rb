@@ -26,6 +26,25 @@ class MessagesController < ApplicationController
       send_sms(message)
     end
   end
+  
+  def get_mass_messages
+  end
+  
+  def mass_messages
+    account_sid = ENV["TWILIO_ACCOUNT_SID"]
+    auth_token = ENV["TWILIO_AUTH_TOKEN"]
+    @client = Twilio::REST::Client.new account_sid, auth_token
+    
+    Listener.find_each do |listener|
+      @client.messages.create(
+        from: ENV["TWILIO_NUMBER"],
+        to: listener.phone_number,
+        body: params[:mass_message][:text]
+      )
+    end
+    
+    redirect_to root_path, notice: "Mass message successfully sent!"
+  end
 
   private
 
