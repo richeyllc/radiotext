@@ -5,7 +5,7 @@
         <div class="row">
           <div id="custom-search-input">
             <div class="input-group col-md-12">
-              <p class="text-center">Conversations With Listeners - Phone Number is <%= ENV["TWILIO_NUMBER"] %></p>
+              <p class="text-center">Conversations With Listeners - Phone Number is <strong><%= number_to_phone(ENV["TWILIO_NUMBER"]) %></strong></p>
             </div>
             <%= link_to "Send Mass Message", get_mass_messages_path %>
           </div>
@@ -16,7 +16,7 @@
                   <div class="chat-body clearfix">
                     <div class="contact_sec">
                       <%= link_to "/messages/#{conversation.sender.phone_number}",  data: { number: conversation.sender.phone_number } do %>
-                        <strong class="primary-font"><%= conversation.sender.phone_number %></strong>
+                        <strong class="primary-font"><%= number_to_phone(conversation.sender.phone_number) %></strong>
                       <% end %>
                     </div>
                   </div>
