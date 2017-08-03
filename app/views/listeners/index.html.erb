@@ -1,0 +1,10 @@
+
+<% if @listeners.any? %>
+  <h1>List of listeners</h1>
+  <%= @listeners.each do |listener| %>
+    <h2>Name: <%= listener.name %></h2>
+    <h3>Phone Number: <%= listener.phone_number %></h3>
+  <% end%>
+<% else %>
+  <h1>There are no listeners yet</h1>
+<% end %>
