@@ -3,7 +3,7 @@ class CompetitionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:incoming_sms]
   
   def index
-    @competitions = Competition.all
+    @competitions = Competition.not_expired
   end
   
   def show
@@ -400,6 +400,6 @@ class CompetitionsController < ApplicationController
     end
     
     def competition_params
-      params.require(:competition).permit(:title, :keyword, :category)
+      params.require(:competition).permit(:title, :keyword, :category, :start_date, :end_date)
     end
 end

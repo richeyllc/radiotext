@@ -31,5 +31,16 @@
   <label>Nth Listener</label>
   <%= f.select :nth_listener, (1..200), {prompt: 'None'} %>
   
+  <br></br>
+  
+  <label>Start Date</label>
+  <%= f.date_select(:start_date, prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, placeholder: "Competition Start Date") %>  
+  
+  <br></br>
+  
+  <label>End Date</label>
+  <%= f.date_select(:end_date, prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, placeholder: "Competition End Date") %>
+  
+  <br></br>
   <%= f.submit "Save" %>
 <% end %>
