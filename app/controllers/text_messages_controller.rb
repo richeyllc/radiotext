@@ -28,7 +28,9 @@ class TextMessagesController < ApplicationController
         send_cable(@message)
         
         # Check competitio -- to be updated later
-        @competition = Competition.where("keyword like ?", "%#{params[:Body]}%").first
+        # Apply downcase to params body
+        keyword = params[:Body].downcase!
+        @competition = Competition.where("keyword like ?", "%#{keyword}%").first
         @competition.competitors.create(phone_number: @listener.phone_number)
         
         # Send SMS
@@ -100,7 +102,9 @@ class TextMessagesController < ApplicationController
       send_cable(@message)
       
       # Check competitio -- to be updated later
-      @competition = Competition.where("keyword like ?", "%#{params[:Body]}%").first
+      # Apply downcase to params body
+      keyword = params[:Body].downcase!
+      @competition = Competition.where("keyword like ?", "%#{keyword}%").first
       @competition.competitors.create(phone_number: @listener.phone_number)
       
       # Send SMS
