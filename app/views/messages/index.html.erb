@@ -11,18 +11,16 @@
           </div>
           <div class="member_list">
             <ul class="list-unstyled">
-              <% if @conversations.count < 0 %>
-                <% @conversations.each do |conversation| %>
-                  <li class="left clearfix">
-                    <div class="chat-body clearfix">
-                      <div class="contact_sec">
-                        <%= link_to "/messages/#{conversation.sender.phone_number}",  data: { number: conversation.sender.phone_number } do %>
-                          <strong class="primary-font"><%= conversation.sender.phone_number %></strong>
-                        <% end %>
-                      </div>
+              <% @conversations.each do |conversation| %>
+                <li class="left clearfix">
+                  <div class="chat-body clearfix">
+                    <div class="contact_sec">
+                      <%= link_to "/messages/#{conversation.sender.phone_number}",  data: { number: conversation.sender.phone_number } do %>
+                        <strong class="primary-font"><%= conversation.sender.phone_number %></strong>
+                      <% end %>
                     </div>
-                  </li>
-                <% end %>
+                  </div>
+                </li>
               <% end %>
               
             </ul>
