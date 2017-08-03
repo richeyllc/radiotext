@@ -15,6 +15,7 @@ class CompetitionsController < ApplicationController
   
   def create
     @competition = Competition.new(competition_params)
+    @competition.keyword.downcase!
     
     if @competition.save
       redirect_to competition_path(@competition), notice: 'Your competition was successfully created!'

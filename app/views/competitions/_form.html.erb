@@ -29,7 +29,7 @@
   
   <br></br>
   <label>Nth Listener</label>
-  <%= f.select :nth_listener, (1..200) %>
+  <%= f.select :nth_listener, (1..200), {prompt: 'None'} %>
   
   <%= f.submit "Save" %>
 <% end %>
