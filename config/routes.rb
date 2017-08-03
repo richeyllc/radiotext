@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :messages
   resources :text_messages
   resources :competitions
-  resources :listeners, only: [:edit, :update]
+  resources :listeners, only: [:index, :edit, :update]
   post '/competitions/:id', to: 'competitions#pick_winner', as: 'pick_winner'
   
   get '/mass_messages' => 'messages#get_mass_messages', as: 'get_mass_messages'
