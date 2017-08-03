@@ -1,6 +1,10 @@
 class ListenersController < ApplicationController
   before_action :set_listener, only: [:edit, :update]
    
+  def index
+    @listeners = Listener.all
+  end
+  
   def edit
   end
   
