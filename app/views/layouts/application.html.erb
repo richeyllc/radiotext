@@ -1,35 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>RadiotextV1</title>
+    <title><%= content_for?(:title) ? yield(:title) : "RadioText"%></title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <meta name="charset" content="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= render partial: 'layouts/google_analytics' if Rails.env.production? %>
   </head>
 
   <body>
 
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse"{role: "navigation"}>
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">RadioText</a>
+          <button class="navbar-toggle" data-target="#navbar-collapse-1" data-toggle="collapse" type="button">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= root_path %>" title="RadioText - Dashboard">
+            <% if true #user_signed_in? %>
+              <%= fa_icon "tachometer", class: 'fa-3x' %>
+              <span class="hidden-sm hidden-md hidden-lg">RadioText</span>
+            <% else %>
+              <%= fa_icon "tachometer", class: 'fa-1x' %>
+              RadioText
+            <% end %>
+          </a>
         </div>
-        <ul class="nav navbar-nav">
-          <li><a href="<%= root_path %>">Home</a></li>
-          <li><a href="<%= messages_path %>">Messages</a></li>
-          <li><a href="<%= competitions_path %>">Competitions</a></li>
-          <li><a href="<%= listeners_path %>">Listeners</a></li>
-          li
-        </ul>
+        <%= render 'layouts/navbar' %>
       </div>
     </nav>
-    
+
     <div class="container">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
-    
+
   </body>
 </html>

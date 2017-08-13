@@ -1,0 +1,77 @@
+#navbar-collapse-1.collapse.navbar-collapse
+  - if true #user_signed_in?
+    %ul.nav.navbar-nav
+      -# Configuration Menu
+      %li{class: (params[:controller] == "messages") ? "active" : nil}
+        -# = active_link_to customers_path, active: ["customers"], title: 'Customers' do
+        = active_link_to messages_path, active: ["messages"], title: 'Messages' do
+          = fa_icon "comments", class: 'fa-3x align-center'
+          %span.fa-title Messages
+
+      %li{class: (params[:controller] == "competitions") ? "active" : nil}
+        -# = active_link_to phone_numbers_path, active: ["phone_numbers"], title: 'Phone Numbers' do
+        = active_link_to competitions_path, active: ["competitions"], title: 'Competitions' do
+          = fa_icon "trophy", class: 'fa-3x'
+          %span.fa-title Contests
+
+      %li{class: (params[:controller] == "listeners") ? "active" : nil}
+        = active_link_to listeners_path, active: ["listeners"], title: 'Reports' do
+          = fa_icon "group", class: 'fa-3x'
+          %span.fa-title Listeners
+
+      -# Sidebar menu
+      -# Configuration Menu
+      -# TODO: Only show this following links if the user is an admin.
+      %li.dropdown.disabled
+        %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#", title: 'Settings'}
+          = fa_icon "cogs", class: 'fa-3x'
+          %span.fa-title Settings
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            = link_to root_path do
+              %span.glyphicon.glyphicon-user
+              Users
+          %li.divider
+          %li
+            = link_to root_path do
+              %span.glyphicon.glyphicon-earphone
+              Phone Numbers
+          %li.divider
+          %li
+            = link_to root_path do
+              = fa_icon "envelope-o"
+              Mass Email Templates
+      -# User Menu
+      %li.dropdown.disabled
+        %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#", title: "User Login/Logout"}
+          = fa_icon "user", class: 'fa-3x'
+          %span.fa-title= "User Login/Logout"
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            = link_to root_path do
+              = fa_icon "cog"
+              My Account
+          %li.divider
+          %li
+            = link_to "destroy_user_session_path", method: :delete do
+              = fa_icon "power-off"
+              Logout
+  - else
+    %ul.nav.navbar-nav
+      %li{class: is_active_link?(new_user_session_path, :inclusive) ? 'active' : nil}
+        = active_link_to new_user_session_path, active: ["master/sessions"] do
+          = fa_icon "power-off", class: 'fa-1x'
+          %span.fa-title Login
+
+-# Scratchpad Modal
+- if true #user_signed_in?
+  .modal.fade#scratchpadModal{tabindex: '-1'}
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} &times;
+          %h3.modal-title
+        .modal-body
+          %p

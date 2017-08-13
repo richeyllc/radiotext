@@ -27,7 +27,7 @@ end
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  
+
   gem 'rspec-rails',      '~> 3.6'
   gem 'capybara',         '~> 2.14'
   gem 'database_cleaner', '~> 1.6'
@@ -42,3 +42,6 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'haml'
+gem 'font-awesome-rails'
+gem 'active_link_to'
