@@ -1,7 +1,17 @@
-<li class="left clearfix <%= message.inbound ? 'admin_chat' : '' %>">
-  <div class="chat-body1 clearfix">
+<% if message.inbound %>
+<li class="left clearfix admin_chat>">
+  <div class="chat-body3 clearfix speech-bubble">
     <p>
       <%= message.text %>
     </p>
   </div>
 </li>
+<% else %>
+<li class="left clearfix">
+  <div class="chat-body2 clearfix admin-bubble">
+    <p>
+      <%= message.text %>
+    </p>
+  </div>
+</li>
+<% end %>

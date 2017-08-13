@@ -25,7 +25,7 @@
    z-index: 9999;
    }
    .search-query:focus + button {
-   z-index: 3;   
+   z-index: 3;
    }
    .all_conversation button {
    background: #f5f3f3 none repeat scroll 0 0;
@@ -195,4 +195,54 @@
   background: #428bca none repeat scroll 0 0;
   color: #fff;
   cursor:pointer;
+}
+// Rob added the following lines
+.admin-bubble {
+	position: relative;
+	background: #8def11;
+	border-radius: .6em;
+  margin-left: 50;
+  margin-right: 0px;
+}
+.admin-bubble:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 12px solid transparent;
+	border-left-color: #8def11;
+	border-right: 0;
+	border-top: 0;
+	margin-top: -6px;
+	margin-right: -12px;
+}
+.chat-body2 p {
+  background: #8def11 none repeat scroll 0 0;
+  padding: 10px;
+}
+
+.speech-bubble {
+  position: relative;
+	background: #43efdd;
+	border-radius: .4em;
+}
+.speech-bubble:after {
+  content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 12px solid transparent;
+	border-right-color: #43efdd;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -6px;
+	margin-left: -12px;
+}
+.chat-body3 p {
+  background: #43efdd none repeat scroll 0 0;
+  padding: 10px;
 }
